@@ -1,0 +1,43 @@
+﻿@{
+    var rules = Session["rules"] as List<string>;
+    if (rules == null)
+    {
+        Session.Add("rules", new List<string>());
+    }
+    if (IsPost)
+    {
+
+        rules.Add(Request.Form["fight club"]);
+
+        Response.Redirect("Rules.cshtml");
+            }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form method="post">
+        <p>
+            Name: <input type="text" name="fight club" /> </br>
+            <input type="submit" value="Submit" class="submit" />
+        </p>
+    </form>
+    <ol>
+        @{ 
+            if (rules != null)
+            {
+                foreach (string rule in rules)
+                {
+                <li>
+                    @rule
+                </li>
+                    }
+                }
+            }
+    </ol>
+</body>
+</html>
